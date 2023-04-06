@@ -1,0 +1,57 @@
+---
+title: "ParameterizedMarkdown"
+author: "Willa Van Liew"
+date: "2023-03-18"
+output: html_document
+params:
+  state: "WA"
+---
+
+```{r}
+ds <- read.csv("https://data.wa.gov/api/views/f6w7-q2d2/rows.csv?accessType=DOWNLOAD")
+##remove alaska and hawaii and BC
+ds <- ds %>%
+  mutate(County = ifelse(State == "AK", paste0(County, " Borough"), paste0(County, " County")), state_name = state.name[match(State,state.abb)])
+counties_sf<- get_urbn_map("counties", sf=TRUE)
+
+state_full = state.name[match(params$state, state.abb)]
+```
+
+```{r}
+##Map completed 
+state_counties = function(state){
+  counties_sf %>%
+  filter(state_name == state)
+}
+
+state_electrics = function(state, ds) {
+  ds %>%
+  filter(state_name == state) %>%
+  mutate(county_name = County) %>%
+  group_by(county_name) %>%
+  summarise(ElectricVehicles = n()) 
+}
+
+FullState = function(state) {
+  left_join(state_counties(state), state_electrics(state, ds), by = "county_name")
+} 
+
+FullState(state_full) %>%
+  ggplot() +
+  geom_sf(aes(fill = ElectricVehicles), color = "brown4", position = "identity") +
+  coord_sf()+
+  theme_minimal() +
+  #scale_fill_steps(n.breaks = 8)+
+  scale_fill_distiller(palette = "Greens", n.breaks = 7, direction = 1)+
+  theme(
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.line.x = element_blank(),
+    axis.line.y = element_blank()
+  )
+```
+

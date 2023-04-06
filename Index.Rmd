@@ -1,0 +1,36 @@
+---
+title: "loading"
+author: "Willa Van Liew"
+date: "2023-03-18"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyquant)
+library(rmarkdown)
+library(purrr)
+library(tidyverse)
+library(ggplot2)
+library(rvest)
+library(jsonlite)
+library(maps)
+library(DT)
+library(urbnmapr)
+```
+
+## R Markdown
+```{r cars, cache=TRUE}
+
+Equity.Analyser <- function(x) {
+  render("ParaM.Rmd", 
+         params = list(state = x),
+         output_file = paste0("~/Documents/DS-Masters/CWD/Parameterized Markdown/files/",x,".html"))
+}
+ds <- read.csv("https://data.wa.gov/api/views/f6w7-q2d2/rows.csv?accessType=DOWNLOAD") %>%
+  mutate(state_name = state.name[match(State,state.abb)])
+```
+```{r, walking}
+States <- unique(ds$State)
+States %>% walk(., function(x) {Equity.Analyser(x)})
+```
+
