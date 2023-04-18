@@ -5,10 +5,11 @@ date: "2023-03-18"
 output: html_document
 params:
   state: "WA"
-code-fold: T
+code-fold: true
 ---
 
 ```{r}
+#| include: false
 ds <- read.csv("https://data.wa.gov/api/views/f6w7-q2d2/rows.csv?accessType=DOWNLOAD")
 ##remove alaska and hawaii and BC
 ds <- ds %>%
@@ -18,8 +19,10 @@ counties_sf<- get_urbn_map("counties", sf=TRUE)
 state_full = state.name[match(params$state, state.abb)]
 ```
 
+
+### Functions to Create Graphic
+
 ```{r}
-##Map completed 
 state_counties = function(state){
   counties_sf %>%
   filter(state_name == state)
@@ -35,8 +38,13 @@ state_electrics = function(state, ds) {
 
 FullState = function(state) {
   left_join(state_counties(state), state_electrics(state, ds), by = "county_name")
-} 
+}
+```
 
+
+### State Map 
+
+```{r}
 FullState(state_full) %>%
   ggplot() +
   geom_sf(aes(fill = ElectricVehicles), color = "brown4", position = "identity") +
