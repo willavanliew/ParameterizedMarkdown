@@ -1,0 +1,2566 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Willa Van Liew">
+<meta name="dcterms.date" content="2023-03-18">
+
+<title>ElectricVehicles - loading</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ElectricVehicles</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link active" data-scroll-target="#r-markdown">R Markdown</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">loading</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Willa Van Liew </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 18, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="r-markdown" class="level2">
+<h2 class="anchored" data-anchor-id="r-markdown">R Markdown</h2>
+<div class="cell" data-hash="loading_cache/html/cars_3c085be52af5dfe82c26ff3f2c1ad498">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Equity.Analyser <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">render</span>(<span class="st">"Parameters.qmd"</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">params =</span> <span class="fu">list</span>(<span class="at">state =</span> x),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">output_file =</span> <span class="fu">paste0</span>(<span class="st">"~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/"</span>,x,<span class="st">".html"</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://data.wa.gov/api/views/f6w7-q2d2/rows.csv?accessType=DOWNLOAD"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_name =</span> state.name[<span class="fu">match</span>(State,state.abb)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>States <span class="ot">&lt;-</span> <span class="fu">unique</span>(ds<span class="sc">$</span>State)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>States <span class="sc">%&gt;%</span> <span class="fu">walk</span>(., <span class="cf">function</span>(x) {<span class="fu">Equity.Analyser</span>(x)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/WA.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c387daf212b.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/WA.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/CA.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c383f5595ac.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/CA.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/OR.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c384eb6fb14.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/OR.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/AR.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c382f086147.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/AR.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/ID.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38eb49c0c.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/ID.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/GA.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38742ccd77.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/GA.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MS.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c381966e905.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MS.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NV.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c386bfe0657.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NV.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/CO.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38303f89e.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/CO.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/TX.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c384366427a.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/TX.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MD.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c381d104b25.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MD.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/SC.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3818af8dec.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/SC.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/AZ.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3822a2cf9e.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/AZ.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NY.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38770a3b83.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NY.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NJ.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c387aafea3d.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NJ.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NC.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3873d8890.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NC.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/VA.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3843a14734.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/VA.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/LA.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c386694db47.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/LA.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/KY.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c381cf2d940.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/KY.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/UT.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38498da118.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/UT.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/CT.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c382c7dc432.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/CT.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MA.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c385196732c.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MA.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/FL.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c387b9c87e7.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/FL.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/OH.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c384311e492.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/OH.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/KS.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3825a35133.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/KS.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/DC.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c385cebf3ad.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/DC.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/HI.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3874116f47.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/HI.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/IN.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c385482a7c1.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/IN.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MN.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3879844e76.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MN.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NH.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38108c3b8d.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NH.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NE.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c385e1453fc.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NE.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/RI.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38797df16.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/RI.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/AK.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c381769302c.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/AK.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/IL.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38575cbe03.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/IL.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/PA.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c385c4fe809.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/PA.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MO.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3826b04462.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/MO.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/WI.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c383b2867fe.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/WI.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/BC.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c384738f38d.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/BC.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/AL.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38201e1ccb.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/AL.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/WY.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38168c4ffc.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/WY.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/TN.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3876486823.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/TN.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/DE.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3811c1d68f.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/DE.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NM.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c38211bda78.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/NM.html
+
+
+processing file: Parameters.qmd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |..........                                                            |  14%
+  ordinary text without R code
+
+
+  |                                                                            
+  |....................                                                  |  29%
+label: unnamed-chunk-1
+
+  |                                                                            
+  |..............................                                        |  43%
+  ordinary text without R code
+
+
+  |                                                                            
+  |........................................                              |  57%
+label: unnamed-chunk-2
+
+  |                                                                            
+  |..................................................                    |  71%
+  ordinary text without R code
+
+
+  |                                                                            
+  |............................................................          |  86%
+label: unnamed-chunk-3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |......................................................................| 100%
+  ordinary text without R code</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>output file: Parameters.knit.md</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/pandoc +RTS -K512m -RTS Parameters.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/willavanliew/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/OK.html --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /Library/Frameworks/R.framework/Versions/4.2/Resources/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/fz/tfymgd913552f_v2h8fqqv1c0000gn/T//RtmpbktQVh/rmarkdown-str16c3872d6eb36.html </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Output created: ~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/OK.html</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

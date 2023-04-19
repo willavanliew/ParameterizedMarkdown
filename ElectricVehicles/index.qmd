@@ -1,0 +1,57 @@
+---
+title: "ElectricVehicles"
+---
+
+### Electric Vehicles
+Data comes from Washington State Department of Licensing and shows the number of Battery Electric and Plug-in Hybrid Vehicles currently registered in Washington state
+
+This analysis uses parameterized markdown to show the state that the vehicle is now located and which counties have the highest number of electric vehicles with licenses from Washington State.
+
+<a href="https://github.com/willavanliew/ParameterizedMarkdown" target="_blank">Associated Github Repository</a>
+The table below shows each state and links to the html file with the associated map. 
+
+
+```{r}
+#| include: false
+library(tidyverse)
+library(shiny)
+library(DT)
+ds <- read.csv("https://data.wa.gov/api/views/f6w7-q2d2/rows.csv?accessType=DOWNLOAD")
+```
+
+
+```{r}
+#| warning: false
+electrics <- ds %>%
+  group_by(State) %>%
+  summarize(ElectricVehicles = n())
+
+
+electric <- function(state){
+  electrics %>%
+    filter(State == state) %>%
+    select(ElectricVehicles)
+}
+
+States <- data.frame(state_code = unique(ds$State), state_full = state.name[match(unique(ds$State),state.abb)]) 
+
+
+States <- States %>%
+  mutate(ElectricVehicles = unlist(map(state_code, electric)),
+         state_full = case_when(
+           state_code == "DC" ~ "Washington DC",
+           state_code == "BC" ~ "British Columbia",
+           TRUE ~ state_full),
+         link = paste0("./files/", state_code,".html"),
+         report = paste0('<a  target=_blank href=\'', link, '\' >', state_full,'</a>' ))
+```
+
+```{r}
+States %>%
+  select(report, ElectricVehicles) %>%
+  datatable(States, 
+          filter="top", 
+          escape=FALSE, 
+          colnames = c("Report", "# Electric Vehicles"),
+          rownames = FALSE)
+```

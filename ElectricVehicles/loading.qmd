@@ -10,12 +10,11 @@ library(tidyquant)
 library(rmarkdown)
 library(purrr)
 library(tidyverse)
-library(ggplot2)
+#library(ggplot2)
 library(rvest)
 library(jsonlite)
 library(maps)
 library(DT)
-library(urbnmapr)
 ```
 
 ## R Markdown
@@ -24,9 +23,10 @@ library(urbnmapr)
 Equity.Analyser <- function(x) {
   render("Parameters.qmd", 
          params = list(state = x),
-         output_file = paste0("~/Documents/DS-Masters/CWD/ParameterizedMarkdown/files/",x,".html"))
+         output_file = paste0("~/Documents/DS-Masters/CWD/ParameterizedMarkdown/ElectricVehicles/files/",x,".html"))
 }
-ds <- read.csv("https://data.wa.gov/api/views/f6w7-q2d2/rows.csv?accessType=DOWNLOAD") %>%
+
+ds <- read.csv("https://data.wa.gov/api/views/f6w7-q2d2/rows.csv?accessType=DOWNLOAD") |>
   mutate(state_name = state.name[match(State,state.abb)])
 ```
 ```{r, walking}

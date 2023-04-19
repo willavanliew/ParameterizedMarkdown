@@ -9,9 +9,15 @@ code-fold: true
 ---
 
 ```{r}
+library(tidyverse)
+library(ggplot2)
+library(urbnmapr)
+
 #| include: false
 ds <- read.csv("https://data.wa.gov/api/views/f6w7-q2d2/rows.csv?accessType=DOWNLOAD")
+
 ##remove alaska and hawaii and BC
+
 ds <- ds %>%
   mutate(County = ifelse(State == "AK", paste0(County, " Borough"), paste0(County, " County")), state_name = state.name[match(State,state.abb)])
 counties_sf<- get_urbn_map("counties", sf=TRUE)
